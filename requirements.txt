@@ -1,0 +1,4 @@
+Django==2.0.3
+Pillow
+django-admin-interface
+django-crispy-forms

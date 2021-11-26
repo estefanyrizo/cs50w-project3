@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{%block title%}
+
+Login
+
+{% endblock%}
+
+{% block main%}
+<form class="form" method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <div class="form-group" align="center">
+        <button id="submit" type="submit">Iniciar sesion</button>
+    </div>
+
+</form>
+<div id="formFooter">
+    <a href="/register">¿No tienes una cuenta?</a>
+</div>
+</div>
+</div>
+{% endblock%}

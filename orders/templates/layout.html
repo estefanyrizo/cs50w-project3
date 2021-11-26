@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> {% block title %} {% endblock %}</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/e1b504be8a.js" crossorigin="anonymous"></script>
+
+  <link href="/static/style.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/static/imagenes/favicon.png">
+
+</head>
+
+<body>
+  {%if request.user.id%}
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+      aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/">Home</a>
+    <span>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        {%if request.user.is_staff%}
+        <li class="nav-item active">
+          <a class="nav-link" href="/verordenes">Ver ordenes<span class="sr-only">(current)</span></a>
+        </li>
+        {% endif %}
+        <li class="nav-item active">
+          <a class="nav-link" href="/logout">Cerrar sesion<span class="sr-only">(current)</span></a>
+        </li>
+    </div>
+  </span>
+  </nav>
+  {% endif %}
+
+  <main class="container-fluid pb-5">
+    {% block main %}{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% if messages%}
+    {% for m in messages%}
+    <script>
+      swal.fire({
+        "title":"Felicitaciones",
+         "text": "{{m}}",
+         "icon": "success"
+      })
+    </script>
+    {% endfor %}
+    {% endif %}
+
+</body>
+
+</html>
