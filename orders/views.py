@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login,  logout
 from django.contrib.auth.decorators import login_required, permission_required
-from .models import Platillo
+from .models import DetallePedido, Platillo
 
 # Create your views here.
 @login_required(login_url="/login")
@@ -43,7 +43,7 @@ def register(request):
             apellido = form.cleaned_data["lastName"]
             password2 = form.cleaned_data["password2"]
             print(password2)
-            nuevoUsuario = authenticate(username = username, nombre = nombre, apellido = apellido, password = password2)
+            nuevoUsuario = authenticate(username = username, first_name = nombre, last_name = apellido, password = password2)
             login(request,nuevoUsuario)
             messages.success(request, "Usuario creado")
             return redirect("/")
@@ -61,3 +61,14 @@ def logout_v(request):
 @permission_required('app.view_detallepedido')
 def verOrdenes(request): 
     return render(request,"ordenes.html")
+
+@login_required(login_url="/login")
+def añadirOrden(request, id):
+
+    platillos = Platillo.objects.filter(id=id)
+    data = {
+        "platillos" : platillos
+    }
+
+    return render(request, "añadirOrden.html", data)
+        

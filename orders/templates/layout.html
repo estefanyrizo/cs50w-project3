@@ -13,6 +13,8 @@
 
   <link href="/static/style.css" rel="stylesheet">
   <link rel="shortcut icon" href="/static/imagenes/favicon.png">
+  {% block head %}
+  {% endblock %}
 
 </head>
 
@@ -27,9 +29,12 @@
     <span>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link" href="/verordenes"><i class="fas fa-shopping-cart"></i><span class="sr-only">(current)</span></a>
+        </li>
         {%if request.user.is_staff%}
         <li class="nav-item active">
-          <a class="nav-link" href="/verordenes">Ver ordenes<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/verpedidos">Ver pedidos<span class="sr-only">(current)</span></a>
         </li>
         {% endif %}
         <li class="nav-item active">

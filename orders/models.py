@@ -31,5 +31,6 @@ class DetallePedido(models.Model):
     cantidadPlatillos = models.IntegerField()
     precioPlatillos = models.FloatField()
     cantidadExtras = models.IntegerField()
+    estado = models.BooleanField()
     id_platillo = models.ForeignKey(Pedido, on_delete=models.PROTECT)
     id_extras = models.ManyToManyField(Extra, blank=True)

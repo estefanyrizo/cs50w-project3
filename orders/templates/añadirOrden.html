@@ -2,29 +2,26 @@
 
 {%block title%}
 
-Index
+Agregar orden
 
 {% endblock%}
 
 {% block main%}
 
-<h1>Platillos</h1>
-
-<div class="row align-items-center">
+<div class="orden-box">
+    <div class="caja">
     {% for platillo in platillos %}
-    <div class="col mb-4">
-        <div class="card align-items-center mt-3 mb-0 mr-2 ml-2">
             {% if platillo.imagen %}
             <img src="/media/{{platillo.imagen}}" class="imagen" alt="">
             {% endif %}
-            <div class="card-body">
+            <div class="form-group">
                 <h5 class="card-title">{{platillo.nombre}}</h5>
                 <h2>${{platillo.precio}}</h2>
-                <a href="/añadirorden/{{platillo.id}}" class="btn btn-primary">Agregar al carrito</a>
+                <a href="/agregarAlCarrito/{{platillo.id}}" class="btn btn-primary">Agregar al carrito</a>
             </div>
-        </div>
-    </div>
+        
     {% endfor %}
+</div>
 </div>
 
 {% endblock%}
