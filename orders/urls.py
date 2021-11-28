@@ -12,7 +12,7 @@ urlpatterns = [
     path("login", LoginView.as_view(template_name = "login.html"), name = "login"),
     path("register", views.register, name = "register"),
     path("logout", LogoutView.as_view(template_name = "logout.html"), name = "logout"),
-    path("verordenes", views.verOrdenes, name = "verordenes"),
+    path("ordenes", views.ordenes, name = "ordenes"),
     path("añadirorden/<id>", views.añadirOrden, name = "añadirorden")
 ]
 

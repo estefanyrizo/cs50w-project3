@@ -58,8 +58,7 @@ def logout_v(request):
     return redirect("/")
 
 @login_required(login_url="/login")
-@permission_required('app.view_detallepedido')
-def verOrdenes(request): 
+def ordenes(request): 
     return render(request,"ordenes.html")
 
 @login_required(login_url="/login")
