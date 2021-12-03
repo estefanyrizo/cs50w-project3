@@ -8,19 +8,26 @@ Registro
 
 {% block main%}
 
-    <form class="form" method="post">
-        {% csrf_token %}
+<div class="login-box">
+    <div class="caja" id="register" align="center">
+        <form class="form" method="post">
 
-        {{ form.as_p }}
+            <img class="icon" src="static/imagenes/icono.png" />
+            <div class="dos-columnas">
+            {% csrf_token %}
 
-        <div class="form-group" align="center">
-            <button class="submit" type="submit">Registar</button>
+            {{ form.as_p }}
         </div>
+            <div class="form-group" align="center">
+                <button class="submit" type="submit">Registar</button>
+            </div>
 
-    </form>
+        </form>
 
-    <div id="formFooter">
-        <a href="/login">Inicia sesion</a>
+        <div id="formFooter">
+            <a href="/login">Inicia sesion</a>
+        </div>
     </div>
+</div>
 
 {% endblock%}

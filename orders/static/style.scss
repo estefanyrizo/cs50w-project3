@@ -1,23 +1,56 @@
 /* Pagina de login*/
 
 .navbar{
-    background: radial-gradient(circle, #690b5d 0%, #3b0a52 100%);
-    }
+    background: radial-gradient(circle, #2c0b69 0%, #17063b 100%);
+}
 
 .icon{
     width: 10rem;
     height: 10rem;
 }
 
-.imagen{
-    width: 15rem;
-    height: 10rem;
+.anuncios{
+  background-color: #2C3238;
 }
-.card
-{
-  background-color: transparent;
+
+.imagen{
+    width: 20rem;
+    height: 15rem;
+}
+
+
+.caja{
+  margin-top: 10%;
   border-radius: 10px 10px 10px 10px;
-  width: 80%;
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  background-color: #FFFFFF;
+  label, a{
+    font-family: serif;
+    font-size: 25px;
+    text-align: center;
+  }
+}
+
+#login {
+    width: 650px;
+    height: 600px;
+    margin: 7em auto;
+}
+
+#register {
+    width: 1000px;
+    height: 900px;
+    margin: 7em auto;
+}
+
+.dos-columnas {
+  margin-top: 5%;
+  margin-left: 8%;
+  margin-right: 8%;
+  margin-bottom: 5%;
+  -webkit-column-count: 2; /* Chrome, Safari, Opera */
+  -moz-column-count: 2; /* Firefox */
+  column-count: 2;
 }
 
 //Form Elements/
@@ -54,7 +87,7 @@ textarea:focus {
   border-color: #7A9D96;
   color: #2C3238;
 }
-button#submit {
+button.submit {
   width: 100%;
   padding: 20px 0;
   text-align: center;
@@ -66,8 +99,36 @@ button#submit {
   transition: .35s linear;
 }
 
-button#submit:hover {
+button.submit:hover {
   opacity: 1;
+}
+
+.submit {
+  width: 30%;
+  text-align: center;
+  background: #3b0a52;
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+  opacity: .8;
+  transition: .35s linear;
+  margin-bottom: 0px;
+  padding-top: 10px;
+}
+
+.submit:hover, .submit2:hover{
+  opacity: 1;
+  color: white
+}
+
+.submit2 {
+  color: #fff;
+  background: #3b0a52;
+  border-radius: 4px;
+  opacity: .8;
+  transition: .35s linear;
+  border: 0;
+  border-radius: 4px;
 }
 
 #formFooter {

@@ -174,3 +174,19 @@ DOMbotonVaciar.addEventListener('click', vaciarCarrito);
 
 // Inicio
 renderizarProductos();
+
+function maxAllowedMultiselect(obj, maxAllowedCount) {
+    var selectedOptions = jQuery('#'+obj.id+" option[value!='']:selected");
+    if (selectedOptions.length >= maxAllowedCount) {
+        if (selectedOptions.length > maxAllowedCount) {
+            selectedOptions.each(function(i) {
+                if (i >= maxAllowedCount) {
+                    jQuery(this).prop("selected",false);
+                }
+            });
+        }
+        jQuery('#'+obj.id+" option[value!='']").not(':selected').prop("disabled",true);
+    } else {
+        jQuery('#'+obj.id+" option[value!='']").prop("disabled",false);
+    }
+}

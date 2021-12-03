@@ -1,6 +1,6 @@
 /* Pagina de login*/
 .navbar {
-  background: radial-gradient(circle, #2f0b69 0%, #260a52 100%);
+  background: radial-gradient(circle, #2c0b69 0%, #17063b 100%);
 }
 
 .icon {
@@ -8,15 +8,50 @@
   height: 10rem;
 }
 
-.imagen {
-  width: 15rem;
-  height: 10rem;
+.anuncios {
+  background-color: #2C3238;
 }
 
-.card {
-  background-color: transparent;
+.imagen {
+  width: 20rem;
+  height: 15rem;
+}
+
+.caja {
+  margin-top: 10%;
   border-radius: 10px 10px 10px 10px;
-  width: 80%;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+          box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  background-color: #FFFFFF;
+}
+
+.caja label, .caja a {
+  font-family: serif;
+  font-size: 25px;
+  text-align: center;
+}
+
+#login {
+  width: 650px;
+  height: 600px;
+  margin: 7em auto;
+}
+
+#register {
+  width: 1000px;
+  height: 900px;
+  margin: 7em auto;
+}
+
+.dos-columnas {
+  margin-top: 5%;
+  margin-left: 8%;
+  margin-right: 8%;
+  margin-bottom: 5%;
+  -webkit-column-count: 2;
+  /* Chrome, Safari, Opera */
+  /* Firefox */
+  column-count: 2;
 }
 
 form {
@@ -61,7 +96,7 @@ button.submit {
   width: 100%;
   padding: 20px 0;
   text-align: center;
-  background: #260a52;
+  background: #3b0a52;
   color: #fff;
   border: 0;
   border-radius: 4px;
@@ -74,6 +109,36 @@ button.submit:hover {
   opacity: 1;
 }
 
+.submit {
+  width: 30%;
+  text-align: center;
+  background: #3b0a52;
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+  opacity: .8;
+  -webkit-transition: .35s linear;
+  transition: .35s linear;
+  margin-bottom: 0px;
+  padding-top: 10px;
+}
+
+.submit:hover, .submit2:hover {
+  opacity: 1;
+  color: white;
+}
+
+.submit2 {
+  color: #fff;
+  background: #3b0a52;
+  border-radius: 4px;
+  opacity: .8;
+  -webkit-transition: .35s linear;
+  transition: .35s linear;
+  border: 0;
+  border-radius: 4px;
+}
+
 #formFooter {
   background-color: #f6f6f6;
   border-top: 1px solid #dce8f1;
@@ -83,6 +148,6 @@ button.submit:hover {
 }
 
 #formFooter a {
-  color: #260a52
+  color: #350b49;
 }
 /*# sourceMappingURL=style.css.map */

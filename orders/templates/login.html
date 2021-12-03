@@ -7,19 +7,24 @@ Login
 {% endblock%}
 
 {% block main%}
-<form class="form" method="post">
-    {% csrf_token %}
+<div class="login-box">
+    <div class="caja" id="login" align="center">
+        <form class="form" method="post">
+            
+            <img class="icon" src="static/imagenes/icono.png"/>
 
-    {{ form.as_p }}
+            {% csrf_token %}
 
-    <div class="form-group" align="center">
-        <button class="submit" type="submit">Iniciar sesion</button>
+            {{ form.as_p }}
+
+            <div class="form-group" align="center">
+                <button class="submit" type="submit">Iniciar sesion</button>
+            </div>
+
+        </form>
+        <div id="formFooter">
+            <a href="/register">¿No tienes una cuenta?</a>
+        </div>
     </div>
-
-</form>
-<div id="formFooter">
-    <a href="/register">¿No tienes una cuenta?</a>
-</div>
-</div>
 </div>
 {% endblock%}

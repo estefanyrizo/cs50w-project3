@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import fields
 
+from orders.models import DetallePedido, Pedido
+
 class UserRegisterForm(UserCreationForm): 
         firstName = forms.CharField()     
         lastName = forms.CharField()
@@ -14,9 +16,20 @@ class UserRegisterForm(UserCreationForm):
                 fields = [
                     "username",
                     "firstName", 
-                    "lastName",  
+                    "lastName", 
                     "email",
                     "password1",
                     "password2"   
-                ]
-                                    
+                ]                                    
+class DetallePedidoForm(forms.ModelForm):
+    class Meta:
+        model = DetallePedido
+        fields = "__all__"
+
+
+class PedidoForm(forms.ModelForm):
+    class Meta:
+        model = Pedido
+        fields = "__all__"
+        
+        

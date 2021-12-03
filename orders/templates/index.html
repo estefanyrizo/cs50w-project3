@@ -7,24 +7,78 @@ Index
 {% endblock%}
 
 {% block main%}
+<header class="anuncios py-5">  
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h1 class="display-4 fw-bolder">Pinocho Pizza</h1>
+      <p class="lead fw-normal text-white-50 mb-0">Aca mostrare anuncios</p>
+    </div>
+  </div>
+</header>
 
-<h1>Platillos</h1>
+{% for categoria in categorias%}
 
-<div class="row align-items-center">
-    {% for platillo in platillos %}
-    <div class="col mb-4">
-        <div class="card align-items-center mt-3 mb-0 mr-2 ml-2">
-            {% if platillo.imagen %}
-            <img src="/media/{{platillo.imagen}}" class="imagen" alt="">
-            {% endif %}
-            <div class="card-body">
-                <h5 class="card-title">{{platillo.nombre}}</h5>
-                <h2>${{platillo.precio}}</h2>
-                <a href="/añadirorden/{{platillo.id}}" class="btn btn-primary">Agregar al carrito</a>
-            </div>
+<section class="py-5">
+<div class="container px-4 px-lg-5 mt-5">
+  <h1>{{categoria.categorias}}</h1>
+  <div class="row gx-5 gx-lg-6 row-cols-3 row-cols-md-5 row-cols-xl-5 justify-content-center">
+    {% for platillo in categoria.platillos.all %}
+    <div class="col mb-5">
+      <div class="card h-100">
+        {% if platillo.imagen %}
+        <img src="/media/{{platillo.imagen}}" class="card-img-top" alt="">
+        {% endif %}
+        <div class="card-body p-4">
+          <div class="text-center">
+            <h5 class="fw-bolder">{{platillo.nombre}}</h5>
+            <h2>${{platillo.precio}}</h2>
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal"
+              data-target="#platilloModal-{{platillo.id}}">
+              Agregar al carrito
+            </button>
+          </div>
+          </div>
         </div>
+      </div>
+    </div>
+    <div class="modal fade" id="platilloModal-{{platillo.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{platillo.nombre}} </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="añadirorden/{{platillo.id}}" id="platilloOrdenes-{{platillo.id}}" method="post">
+              {%csrf_token%}
+              <input type="number" name="cantidad" placeholder="Cantidad" required>
+              <input type="text" name="precio" value="{{platillo.precio}}" disabled>
+              <input type="text" name="descripcion" placeholder="Algo que mencionarnos">
+              {%if platillo.maxExtras > 0%}
+              <select name="extras" id="extras{{platillo.id}}" multiple
+                onchange="maxAllowedMultiselect(this, {{platillo.maxExtras}})">
+                {% for extra in extras %}
+                <option value="{{extra.id}}">{{extra.nombre}}</option>
+                {% endfor %}
+              </select>
+              {%endif%}
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-outline-primary mb-0" value="Guardar orden" form="platilloOrdenes-{{platillo.id}}">
+          </div>
+        </div>
+      </div>
     </div>
     {% endfor %}
+  </div>
 </div>
+</section>
+{% endfor %}
 
-{% endblock%}
+  {% endblock%}

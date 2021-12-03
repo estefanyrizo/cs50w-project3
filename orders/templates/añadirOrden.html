@@ -9,19 +9,14 @@ Agregar orden
 {% block main%}
 
 <div class="orden-box">
+    <form>
     <div class="caja">
-    {% for platillo in platillos %}
-            {% if platillo.imagen %}
-            <img src="/media/{{platillo.imagen}}" class="imagen" alt="">
-            {% endif %}
-            <div class="form-group">
-                <h5 class="card-title">{{platillo.nombre}}</h5>
-                <h2>${{platillo.precio}}</h2>
-                <a href="/agregarAlCarrito/{{platillo.id}}" class="btn btn-primary">Agregar al carrito</a>
-            </div>
+
+        {{detallePedidoForm}}
         
-    {% endfor %}
-</div>
+        <button type="submit" > enviar</button>
+    </form>
+    </div>
 </div>
 
 {% endblock%}

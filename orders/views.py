@@ -1,37 +1,31 @@
+from django.contrib.auth import decorators
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, reverse
-from .forms import UserRegisterForm
+from .forms import DetallePedidoForm, UserRegisterForm, PedidoForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login,  logout
 from django.contrib.auth.decorators import login_required, permission_required
-from .models import DetallePedido, Platillo
+from .models import Categoria, DetallePedido, Pedido, Platillo, Extra
 
 # Create your views here.
 @login_required(login_url="/login")
 def index(request):
-    platillos = Platillo.objects.all()
+
+    platillos = list(
+        Platillo.objects.order_by("categoria")
+    )
+
+    categorias = Categoria.objects.all()
+
+    extras = Extra.objects.all()
     data = {
-        "platillos" : platillos
+        "platillos" : platillos,
+        "extras" : extras,
+        "categorias" : categorias,
     }
+
     return render(request,"index.html", data)
-
-""" def logins(request):
-
-    if request.method == 'POST':
-        username = request.POST["username"]
-        password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            # Redirect to a success page.
-            return redirect(to="index")
-            
-        else:
-           print("No sirve")
-
-    return render(request, "login.html")
- """
 
 def register(request):
     if request.method == "POST":
@@ -43,10 +37,15 @@ def register(request):
             apellido = form.cleaned_data["lastName"]
             password2 = form.cleaned_data["password2"]
             print(password2)
-            nuevoUsuario = authenticate(username = username, first_name = nombre, last_name = apellido, password = password2)
+            nuevoUsuario.first_name = nombre
+            nuevoUsuario.last_name = apellido
+            nuevoUsuario.save()
+            nuevoUsuario = authenticate(username = username, password = password2)
             login(request,nuevoUsuario)
             messages.success(request, "Usuario creado")
             return redirect("/")
+        else:
+            print(form.errors)
 
     else:
         form = UserRegisterForm()
@@ -64,10 +63,29 @@ def ordenes(request):
 @login_required(login_url="/login")
 def añadirOrden(request, id):
 
-    platillos = Platillo.objects.filter(id=id)
-    data = {
-        "platillos" : platillos
-    }
+    if request.method == "POST":
+        cantidad = request.POST.get("cantidad")
+        descripcion = request.POST.get("descripcion")        
+        if not descripcion:
+            descripcion = "Nada que mencionar"
+        platillo = Platillo.objects.filter(id=id)[0]
+        precio = platillo.precio
+        total = float(cantidad) * precio
+        cliente = request.user
+        extras = request.POST.getlist("extras")
 
-    return render(request, "añadirOrden.html", data)
+        pedido = Pedido(descripcion=descripcion, total=total, cliente=cliente)
+        pedido.save()
+        detallePedido = DetallePedido(cantidadPlatillos=cantidad, precioPlatillos=precio, estado=False, platillo=platillo, pedido=pedido)
+
+        detallePedido.save() 
+
+        extra = []
+        for i in extras:
+            extra.append(Extra.objects.filter(id=i)[0])
+            
+        for i in extra:    
+            detallePedido.extras.add(i) 
+        
+        return redirect("/")
         
