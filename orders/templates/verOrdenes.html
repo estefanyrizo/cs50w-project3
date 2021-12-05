@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{%block title%}
+
+Listar ordenes
+
+{% endblock%}
+
+{% block main%}
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Cliente</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Platillo</th>
+        <th scope="col">Extras</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Total</th>
+        <th scope="col">Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    {% for pedido in pedido%}
+      <tr>
+        <td>{{pedido.pedido.cliente}}</td>
+        <td>{{pedido.pedido.descripcion}}</td>
+        <td>{{pedido.platillo.nombre}}</td>
+        <td>{{pedido.platillo.categoria.categorias}}</td>
+        <td>
+        {% for extras in pedido.extras.all%}
+        {{extras.nombre}},
+        {% endfor %}</td>
+        <td>{{pedido.precioPlatillos}}<td>
+        <td>{{pedido.cantidadPlatillos}}<td>
+        <td>{{pedido.pedido.total}}<td>
+        {% if pedido.estado == true%}
+        <td>Entregado</td>
+        {% else %}
+        <td>En espera</td>
+        {%endif%}
+        
+      </tr>
+    {% endfor %}
+
+    </tbody>
+  </table>
+
+{% endblock%}

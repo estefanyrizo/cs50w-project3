@@ -31,7 +31,6 @@ class Pedido(models.Model):
     def __str__(self):
         return f"Pedido: {self.id}"
 
-
 class DetallePedido(models.Model):
     cantidadPlatillos = models.IntegerField()
     precioPlatillos = models.FloatField()

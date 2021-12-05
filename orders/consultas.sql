@@ -21,14 +21,14 @@ CREATE TABLE "orders_platillo" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
 --
 -- Add field extras to detallepedido
 --
-CREATE TABLE "orders_detallepedido_extras" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "detallepedido_id" integer NOT NULL REFERENCES "orders_detallepedido" ("id") DEFERRABLE INITIALLY DEFERRED, "extra_id" integer NOT NULL REFERENCES "orders_extra" ("id") DEFERRABLE INITIALLY DEFERRED);
+CREATE TABLE "orders_detallepedido_extras" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "detallepedido_id" integer NOT NULL REFERENCES 
+"orders_detallepedido" ("id") DEFERRABLE INITIALLY DEFERRED, "extra_id" integer NOT NULL REFERENCES "orders_extra" ("id") DEFERRABLE INITIALLY DEFERRED);
 --
 -- Add field pedido to detallepedido
 --
 ALTER TABLE "orders_detallepedido" RENAME TO "orders_detallepedido__old";
-CREATE TABLE "orders_detallepedido" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "cantidadPlatillos" integer NOT NULL, "precioPlatillos" real NOT NULL, "estado" bool NOT NULL, "pedido_id" integer NOT NULL REFERENCES "orders_pedido" ("id") DEFERRABLE INITIALLY DEFERRED);   
-INSERT INTO "orders_detallepedido" ("id", "cantidadPlatillos", "precioPlatillos", "estado", "pedido_id") SELECT "id", "cantidadPlatillos", 
-"precioPlatillos", "estado", NULL FROM "orders_detallepedido__old";
+CREATE TABLE "orders_detallepedido" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "cantidadPlatillos" integer NOT NULL, "precioPlatillos" real NOT NULL, "estado" bool NOT NULL, "pedido_id" integer NOT NULL REFERENCES "orders_pedido" ("id") DEFERRABLE INITIALLY DEFERRED);     
+INSERT INTO "orders_detallepedido" ("id", "cantidadPlatillos", "precioPlatillos", "estado", "pedido_id") SELECT "id", "cantidadPlatillos", "precioPlatillos", "estado", NULL FROM "orders_detallepedido__old";
 DROP TABLE "orders_detallepedido__old";
 CREATE INDEX "orders_pedido_cliente_id_aadcde6c" ON "orders_pedido" ("cliente_id");
 CREATE INDEX "orders_platillo_categoria_id_f5ff970d" ON "orders_platillo" ("categoria_id");
@@ -46,3 +46,8 @@ DROP TABLE "orders_detallepedido__old";
 CREATE INDEX "orders_detallepedido_pedido_id_64edb50c" ON "orders_detallepedido" ("pedido_id");
 CREATE INDEX "orders_detallepedido_platillo_id_3c029398" ON "orders_detallepedido" ("platillo_id");
 COMMIT;
+
+
+drop table orders_detallepedido_extras
+drop table orders_detallepedido__old
+drop table orders_pedido

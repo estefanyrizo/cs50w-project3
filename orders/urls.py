@@ -13,7 +13,8 @@ urlpatterns = [
     path("register", views.register, name = "register"),
     path("logout", LogoutView.as_view(template_name = "logout.html"), name = "logout"),
     path("ordenes", views.ordenes, name = "ordenes"),
-    path("añadirorden/<id>", views.añadirOrden, name = "añadirorden")
+    path("añadirorden/<id>", views.añadirOrden, name = "añadir-orden"),
+    path("listar-ordenes", views.listarOrdenes, name = "listar-ordenes")
 ]
 
 if settings.DEBUG:

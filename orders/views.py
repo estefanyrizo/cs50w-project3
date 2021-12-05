@@ -58,7 +58,20 @@ def logout_v(request):
 
 @login_required(login_url="/login")
 def ordenes(request): 
-    return render(request,"ordenes.html")
+
+    pedidos = Pedido.objects.filter(cliente = request.user)
+
+    detallePedidos = []
+    for pedido in pedidos:
+        detallePedidos.append(DetallePedido.objects.filter(pedido = pedido))
+        
+        
+    for detallePedidos in detallePedidos: 
+        data = {
+            "pedido" : detallePedidos
+        }
+
+    return render(request,"ordenes.html", data)
 
 @login_required(login_url="/login")
 def añadirOrden(request, id):
@@ -70,7 +83,7 @@ def añadirOrden(request, id):
             descripcion = "Nada que mencionar"
         platillo = Platillo.objects.filter(id=id)[0]
         precio = platillo.precio
-        total = float(cantidad) * precio
+        total = round(float(cantidad) * precio, 2)
         cliente = request.user
         extras = request.POST.getlist("extras")
 
@@ -88,4 +101,13 @@ def añadirOrden(request, id):
             detallePedido.extras.add(i) 
         
         return redirect("/")
-        
+@login_required(login_url="/login")
+def listarOrdenes(request):
+
+    detallePedidos = DetallePedido.objects.all()
+
+    data = {
+        "pedido" : detallePedidos
+    }
+
+    return render(request,"verOrdenes.html", data)
