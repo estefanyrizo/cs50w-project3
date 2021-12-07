@@ -14,7 +14,9 @@ urlpatterns = [
     path("logout", LogoutView.as_view(template_name = "logout.html"), name = "logout"),
     path("ordenes", views.ordenes, name = "ordenes"),
     path("añadirorden/<id>", views.añadirOrden, name = "añadir-orden"),
-    path("listar-ordenes", views.listarOrdenes, name = "listar-ordenes")
+    path("listar-ordenes", views.listarOrdenes, name = "listar-ordenes"),
+    path("realizar-orden/<pedidoPk>", views.realizarOrden, name = "realizar-orden"),
+    path("historial", views.historial, name="historial")
 ]
 
 if settings.DEBUG:

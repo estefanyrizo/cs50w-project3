@@ -59,19 +59,23 @@ def logout_v(request):
 @login_required(login_url="/login")
 def ordenes(request): 
 
-    pedidos = Pedido.objects.filter(cliente = request.user)
+    pedido = Pedido.objects.filter(cliente = request.user, estado = False).first()
 
-    detallePedidos = []
-    for pedido in pedidos:
-        detallePedidos.append(DetallePedido.objects.filter(pedido = pedido))
-        
-        
-    for detallePedidos in detallePedidos: 
-        data = {
-            "pedido" : detallePedidos
-        }
+    data = {
+        "pedido" : pedido
+    }
 
     return render(request,"ordenes.html", data)
+
+@login_required(login_url="/login")
+def historial(request): 
+
+    pedido = Pedido.objects.filter(cliente = request.user).all()
+    data = {
+        "pedidos" : pedido
+    }
+
+    return render(request,"historial.html", data)
 
 @login_required(login_url="/login")
 def añadirOrden(request, id):
@@ -87,9 +91,10 @@ def añadirOrden(request, id):
         cliente = request.user
         extras = request.POST.getlist("extras")
 
-        pedido = Pedido(descripcion=descripcion, total=total, cliente=cliente)
+        pedido = getOrder(cliente)
+        pedido.total += total
         pedido.save()
-        detallePedido = DetallePedido(cantidadPlatillos=cantidad, precioPlatillos=precio, estado=False, platillo=platillo, pedido=pedido)
+        detallePedido = DetallePedido(descripcion = descripcion, cantidadPlatillos=cantidad, precioPlatillos=precio, platillo=platillo, pedido=pedido)
 
         detallePedido.save() 
 
@@ -101,6 +106,22 @@ def añadirOrden(request, id):
             detallePedido.extras.add(i) 
         
         return redirect("/")
+
+def getOrder(user):
+    pedido = Pedido.objects.filter(cliente = user, estado = False).first()
+    if not pedido:
+        pedido = Pedido.objects.create(total=0, cliente=user)
+    
+    return pedido
+
+@login_required(login_url="/login")
+def realizarOrden(request, pedidoPk):
+    pedido = Pedido.objects.filter(id = pedidoPk).first()
+    pedido.estado = True
+    pedido.save()
+    messages.success(request, "Pedido realizado")
+    return redirect ("/")
+
 @login_required(login_url="/login")
 def listarOrdenes(request):
 

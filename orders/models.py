@@ -24,17 +24,20 @@ class Platillo(models.Model):
         return f"Hemos agregado este platillo: {self.nombre}"
 
 class Pedido(models.Model):
-    descripcion = models.CharField(max_length=50)
     total = models.FloatField()
     cliente = models.ForeignKey(User, on_delete=models.PROTECT)
     fecha = models.DateTimeField(auto_now_add=True)
+    estado = models.BooleanField(default=False)
     def __str__(self):
         return f"Pedido: {self.id}"
 
 class DetallePedido(models.Model):
+    descripcion = models.CharField(max_length=50)
     cantidadPlatillos = models.IntegerField()
     precioPlatillos = models.FloatField()
-    estado = models.BooleanField()
     platillo = models.ForeignKey(Platillo, on_delete=models.PROTECT)
-    pedido = models.ForeignKey(Pedido, on_delete=models.PROTECT)
+    pedido = models.ForeignKey(Pedido, on_delete=models.PROTECT, related_name="detalles")
     extras = models.ManyToManyField(Extra, blank=True)
+    def get_subtotal(self):
+        return round(float(self.cantidadPlatillos) * float(self.precioPlatillos), 2)
+

@@ -20,29 +20,26 @@ Listar ordenes
         <th scope="col">Cantidad</th>
         <th scope="col">Total</th>
         <th scope="col">Estado</th>
+        <th scope="col">Fecha</th>
       </tr>
     </thead>
     <tbody>
-
     {% for pedido in pedido%}
+   
       <tr>
         <td>{{pedido.pedido.cliente}}</td>
-        <td>{{pedido.pedido.descripcion}}</td>
+        <td>{{pedido.descripcion}}</td>
         <td>{{pedido.platillo.nombre}}</td>
         <td>{{pedido.platillo.categoria.categorias}}</td>
         <td>
         {% for extras in pedido.extras.all%}
         {{extras.nombre}},
         {% endfor %}</td>
-        <td>{{pedido.precioPlatillos}}<td>
-        <td>{{pedido.cantidadPlatillos}}<td>
-        <td>{{pedido.pedido.total}}<td>
-        {% if pedido.estado == true%}
-        <td>Entregado</td>
-        {% else %}
-        <td>En espera</td>
-        {%endif%}
-        
+        <td>{{pedido.precioPlatillos}}</td>
+        <td>{{pedido.cantidadPlatillos}}</td>
+        <td>{{pedido.pedido.total}}</td>
+        <td>{{pedido.pedido.estado}}</td>
+        <td>{{pedido.pedido.fecha}}</td>
       </tr>
     {% endfor %}
 

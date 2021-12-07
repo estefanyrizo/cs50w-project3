@@ -22,23 +22,31 @@ Carrito
     </thead>
     <tbody>
 
-    {% for pedido in pedido.all%}
-      <tr>   
-        <td>{{pedido.pedido.descripcion}}</td>
-        <td>{{pedido.platillo.nombre}}</td>
-        <td>{{pedido.platillo.categoria.categorias}}</td>
+    <tr> <td colspan="9">{{pedido.fecha}} - {{pedido.estado}}</td> 
+    </tr>
+    {% for detallePedido in pedido.detalles.all%}
+    <tr>   
+        <td>{{detallePedido.descripcion}}</td>
+        <td>{{detallePedido.platillo.categoria.categorias}}</td>
+        <td>{{detallePedido.platillo.nombre}}</td>
         <td>
-          {% for extras in pedido.extras.all%}
+          {% for extras in detallePedido.extras.all%}
           {{extras.nombre}},
           {% endfor %}
         </td>
-        <td>{{pedido.precioPlatillos}}<td>
-        <td>{{pedido.cantidadPlatillos}}<td>
-        <td>{{pedido.pedido.total}}<td>
-      </tr>
+        <td>{{detallePedido.precioPlatillos}}</td>
+        <td>{{detallePedido.cantidadPlatillos}}</td>
+        <td>{{detallePedido.get_subtotal}}</td>
+      </tr>     
     {% endfor %}
-
+    <tr> <td colspan="6">Total</td> 
+      <td>{{pedido.total}}</td>
+    </tr> 
     </tbody>
   </table>
+
+  <a href="/realizar-orden/{{pedido.id}}" class="btn btn-primary"> Realizar compra</a>
+  
+
 
 {% endblock%}

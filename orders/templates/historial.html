@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{%block title%}
+
+Historial
+
+{% endblock%}
+
+{% block main%}
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Platillo</th>
+        <th scope="col">Extras</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for pedido in pedidos%}
+      <tr> <td colspan="9">{{pedido.fecha}}</td> 
+      </tr>
+      {% for detallePedido in pedido.detalles.all%}
+      <tr>   
+          <td>{{detallePedido.descripcion}}</td>
+          <td>{{detallePedido.platillo.categoria.categorias}}</td>
+          <td>{{detallePedido.platillo.nombre}}</td>
+          <td>
+            {% for extras in detallePedido.extras.all%}
+            {{extras.nombre}},
+            {% endfor %}
+          </td>
+          <td>{{detallePedido.precioPlatillos}}</td>
+          <td>{{detallePedido.cantidadPlatillos}}</td>
+          {% if pedido.estado  == True %}
+          <td>Completada</td>
+          {% else %}
+          <td>En espera</td>
+          {% endif %}
+          <td>{{detallePedido.get_subtotal}}</td>
+         
+        </tr>     
+      {% endfor %}
+      {% endfor %}
+
+    </tbody>
+  </table>
+
+{% endblock%}
