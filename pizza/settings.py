@@ -25,11 +25,11 @@ SECRET_KEY = 'i0&iq&e9u9h6(4_7%pt2s9)f=c$kso=k$c$w@fi9215s=1q0^d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS=["*"]
 
 LOGOUT_REDIRECT_URL = "/"
 
-# Application definition    
+# Application definition
 
 INSTALLED_APPS = [
     'admin_interface',
@@ -47,7 +47,7 @@ INSTALLED_APPS = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-X_FRAME_OPTIONS  =  'SAMEORIGIN' 
+X_FRAME_OPTIONS  =  'SAMEORIGIN'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

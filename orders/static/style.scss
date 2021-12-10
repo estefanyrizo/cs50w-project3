@@ -140,7 +140,18 @@ button.submit:hover {
   border-radius: 0 0 10px 10px;
 
   a{
-    color:#350b49 
+    color:#350b49
   }
 }
 
+.card-img-top {
+    object-fit: cover;
+    width: 100%;
+    height: 200px;
+    border-top-left-radius: calc(0.25rem - 1px);
+    border-top-right-radius: calc(0.25rem - 1px);
+}
+
+section{
+  text-align: center;
+}
