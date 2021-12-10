@@ -64,13 +64,13 @@ input {
   border: 0;
   border-bottom: 2px solid #D3D8DC;
   outline: 0;
-  background: #fff;
+  background: #17063b;
   padding: 20px 0 4px;
   margin: 0 0 20px;
   color: #777B7E;
 }
 input:focus {
-  border-color: #96639b;
+  border-color: #17063b;
   color: #2C3238;
 }
 textarea {
@@ -91,7 +91,7 @@ button.submit {
   width: 100%;
   padding: 20px 0;
   text-align: center;
-  background: #3b0a52;
+  background: radial-gradient(circle, #2c0b69 0%, #17063b 100%);
   color: #fff;
   border: 0;
   border-radius: 4px;
@@ -154,4 +154,21 @@ button.submit:hover {
 
 section{
   text-align: center;
+}
+
+#banner{
+    background: url(https://png.pngtree.com/thumb_back/fw800/back_our/20190621/ourmid/pngtree-pizza-simple-black-banner-image_189696.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: center;
+}
+
+.container-fluid{
+  width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+ul{
+  align-items: center;
 }
